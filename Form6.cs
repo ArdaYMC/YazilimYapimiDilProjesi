@@ -27,7 +27,7 @@ namespace deneme2
         }
         private void resimal()
         {
-            
+
             resimSec.Filter = "Resim Dosyası | *.jpg;*.jpeg;*.png;";
             resimSec.ShowDialog();
             pictureBox1.Image = new Bitmap(resimSec.FileName);
@@ -35,22 +35,30 @@ namespace deneme2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddWordToDB(txtBoxEngWordName.Text, txtBoxTrWordName.Text);
- 
+            AddWordToDB(txtBoxEngWordName.Text, txtBoxTrWordName.Text,txtBoxWordExample.Text);
+
+
         }
         private string connectionString = "Data Source= .;Initial Catalog = 6TekrardaDilOgrenme; Integrated Security = True";
-        private void AddWordToDB(string engWordName, string trWordName)
+        private void AddWordToDB(string engWordName, string trWordName,string wordExample)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand("Insert into Kelimeler(ingilizceKelime, turkceKelime,kelimeResimYolu) values(@ingilizceKelime,@turkceKelime,@kelimeResimYolu)", connection);
-                command.Parameters.AddWithValue("@ingilizceKelime", engWordName);
-                command.Parameters.AddWithValue("@turkceKelime", trWordName);
-                command.Parameters.AddWithValue("@kelimeResimYolu", resimSec.FileName);
+                connection.Open();
+                SqlCommand insterWordCommand = new SqlCommand("INSERT INTO Kelimeler(ingilizceKelime, turkceKelime,kelimeResimYolu) values(@ingilizceKelime,@turkceKelime,@kelimeResimYolu); SELECT SCOPE_IDENTITY();", connection);
+                insterWordCommand.Parameters.AddWithValue("@ingilizceKelime", engWordName);
+                insterWordCommand.Parameters.AddWithValue("@turkceKelime", trWordName);
+                insterWordCommand.Parameters.AddWithValue("@kelimeResimYolu", resimSec.FileName);
+
+                int kelimeID=Convert.ToInt32(insterWordCommand.ExecuteScalar());
+
+                SqlCommand insertExampleCommand = new SqlCommand("INSERT INTO KelimeOrnek (kelimeID, kelimeOrnek) VALUES (@KelimeID, @KelimeOrnek);", connection);
+                insertExampleCommand.Parameters.AddWithValue("@KelimeID", kelimeID);
+                insertExampleCommand.Parameters.AddWithValue("@KelimeOrnek", wordExample);
+
                 try
                 {
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    insertExampleCommand.ExecuteNonQuery();
                     MessageBox.Show("Kelime eklenmiştir.");
                 }
                 catch (Exception ex)
@@ -58,11 +66,10 @@ namespace deneme2
                     MessageBox.Show("Bir hata oluştu: " + ex.Message);
                 }
             }
-           
-        }
-
+        }   
     }
 }
+
  
              
                 

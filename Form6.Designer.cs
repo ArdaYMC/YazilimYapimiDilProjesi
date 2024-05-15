@@ -37,6 +37,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.resimSec = new System.Windows.Forms.OpenFileDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtBoxWordExample = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +70,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.Location = new System.Drawing.Point(71, 243);
+            this.label1.Location = new System.Drawing.Point(47, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(266, 24);
             this.label1.TabIndex = 4;
@@ -78,7 +80,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.Location = new System.Drawing.Point(62, 175);
+            this.label2.Location = new System.Drawing.Point(47, 175);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(275, 24);
             this.label2.TabIndex = 5;
@@ -117,11 +119,30 @@
             // 
             this.resimSec.FileName = "openFileDialog1";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label4.Location = new System.Drawing.Point(47, 295);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(266, 24);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Kelimenin Türkçe halini giriniz:";
+            // 
+            // txtBoxWordExample
+            // 
+            this.txtBoxWordExample.Location = new System.Drawing.Point(343, 297);
+            this.txtBoxWordExample.Name = "txtBoxWordExample";
+            this.txtBoxWordExample.Size = new System.Drawing.Size(147, 22);
+            this.txtBoxWordExample.TabIndex = 9;
+            // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(941, 472);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtBoxWordExample);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
@@ -150,5 +171,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.OpenFileDialog resimSec;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtBoxWordExample;
     }
 }
