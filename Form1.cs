@@ -14,7 +14,7 @@ namespace deneme2
 {
     public partial class Form1 : Form
     {
-        private string connectionString = "Data Source = .; Initial Catalog = EminHocaninDeneme; Integrated Security = True;"; // Veritabanı bağlantı dizesi
+        private string connectionString = "Data Source = .; Initial Catalog = 6TekrardaDilOgrenme; Integrated Security = True;"; // Veritabanı bağlantı dizesi
         public Form1()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace deneme2
             form2.Show();  
             this.Hide();   
         }
-        bool isthere;
+
         private void button1_Click(object sender, EventArgs e)
         {
             string username = textBox1.Text;
@@ -58,7 +58,7 @@ namespace deneme2
             bool isAuthenticated = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT KullaniciAdi, Sifre FROM KullaniciGiris WHERE KullaniciAdi = @Username AND Sifre = @Password", connection);
+                SqlCommand command = new SqlCommand("SELECT kullaniciAdi, sifre FROM KullaniciGiris WHERE kullaniciAdi = @Username AND sifre = @Password", connection);
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@Password", password);
                 try
@@ -87,9 +87,5 @@ namespace deneme2
             this.Hide();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

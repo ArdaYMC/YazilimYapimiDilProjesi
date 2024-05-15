@@ -22,16 +22,6 @@ namespace deneme2
             Application.Exit();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void geriAlToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             Form1 anamenu = new Form1();
@@ -41,15 +31,17 @@ namespace deneme2
 
         }
 
-        private void düzenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Form5 quizeGiris = new Form5();
             quizeGiris.Show();
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form6 kelimeekleme = new Form6();
+            kelimeekleme.Show();
             this.Close();
         }
     }

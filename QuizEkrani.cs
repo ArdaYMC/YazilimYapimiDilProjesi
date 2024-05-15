@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Net;
-using System.IO;
-using System.Net.NetworkInformation;
-using System.Drawing;
 
 namespace deneme2
 {
@@ -19,24 +18,24 @@ namespace deneme2
         string[] wrongChoices = new string[4];
         string[] choices = new string[4];
         int questionIndex = 0;
-        int totalQuestions = 0;
+        int totalQuestions;
+
         ProgressBar progressBar1 = new ProgressBar();
         int correctAnswers = 0;
         bool questionAnsweredCorrectly = false;
         DateTime startTime;
+        Dictionary<string, int> questionCorrectCount = new Dictionary<string, int>();
+        HashSet<string> learnedQuestions = new HashSet<string>();
 
-        public QuizEkrani()
+        public QuizEkrani(int questionCount)
         {
             InitializeComponent();
-        }
-
-        private void QuizEkrani_Load(object sender, EventArgs e)
-        {
+            totalQuestions = questionCount;
             progressBar1.Location = new Point(50, 250);
             progressBar1.Width = 300;
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = 100;
-            progressBar1.Step = 10;
+            progressBar1.Maximum = totalQuestions;        // Bu kısmı form5'deki textbox1.text kısmından alacak 
+            progressBar1.Step = 1;
             this.Controls.Add(progressBar1);
             ShowQuestions();
             startTime = DateTime.Now;
@@ -46,30 +45,24 @@ namespace deneme2
         {
             TimeSpan elapsedTime = DateTime.Now - startTime;
             string elapsedTimeString = string.Format("{0:D2}:{1:D2}:{2:D2}", elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds);
-
             SaveElapsedTime(elapsedTimeString);
-
             CheckAnswer();
-
-            if (!reader.IsClosed && questionIndex < totalQuestions)
+            if ((reader != null) && (!reader.IsClosed) && (questionIndex < totalQuestions - 1))
             {
                 reader.Read();
                 questionIndex++;
                 DisplayQuestion();
-                startTime = DateTime.Now; // Yeni soruya geçildiğinde başlangıç zamanını güncelle
+                startTime = DateTime.Now;
             }
-            ShowQuestions();
+            else
+            {
+                ShowQuestions();
+            }
+            UpdateProgressBar();
             radioButton1.Checked = false;
             radioButton2.Checked = false;
             radioButton3.Checked = false;
             radioButton4.Checked = false;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Form5 geridon = new Form5();
-            geridon.Show();
-            this.Close();
         }
 
         private void ShowQuestions()
@@ -77,19 +70,19 @@ namespace deneme2
             try
             {
                 connection.Open();
-                string query = "SELECT TOP 1 SorulanKelime, DogruCevap, Kelime_gorseli FROM Test_sorulari_tablosu ORDER BY NEWID()";
+                string query = "SELECT SorulanKelime, DogruCevap, Kelime_gorseli FROM Test_sorulari_tablosu WHERE Ogrenilmis_sorular = 0 ORDER BY NEWID();";
+
                 command = new SqlCommand(query, connection);
                 reader = command.ExecuteReader();
 
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    totalQuestions++;
                     DisplayQuestion();
                 }
                 else
                 {
-                    MessageBox.Show("Sorular bulunamadı!");
+                    MessageBox.Show("Öğrenilmemiş soru bulunamadı!");
                 }
             }
             catch (Exception ex)
@@ -109,13 +102,12 @@ namespace deneme2
         {
             try
             {
-                if (!reader.IsClosed)
+                if (reader != null && !reader.IsClosed)
                 {
                     label3.Text = reader["SorulanKelime"].ToString();
                     correctAnswer = reader["DogruCevap"].ToString();
                     string imageUrl = reader["Kelime_gorseli"].ToString();
 
-                    // PictureBox'a resmi yükle
                     pictureBox1.ImageLocation = imageUrl;
 
                     GetWrongChoices();
@@ -145,6 +137,7 @@ namespace deneme2
                 MessageBox.Show("Doğru cevap!");
                 correctAnswers++;
                 questionAnsweredCorrectly = true;
+                UpdateQuestionCorrectCount();
             }
             else if (radioButton1.Checked == false && radioButton2.Checked == false && radioButton3.Checked == false && radioButton4.Checked == false)
             {
@@ -155,8 +148,6 @@ namespace deneme2
                 MessageBox.Show("Yanlış cevap! Doğru cevap: " + correctAnswer);
                 questionAnsweredCorrectly = false;
             }
-
-            UpdateProgressBar();
         }
 
         private void GetWrongChoices()
@@ -236,13 +227,12 @@ namespace deneme2
         {
             if (questionAnsweredCorrectly)
             {
-                progressBar1.PerformStep();
+                progressBar1.Value = Math.Min(progressBar1.Maximum, progressBar1.Value + progressBar1.Step);
             }
 
             if (progressBar1.Value == progressBar1.Maximum)
             {
                 MessageBox.Show("Tebrikler! Quiz tamamlandı.");
-                // Quiz tamamlandığında yapılacak işlemler burada olabilir.
             }
         }
 
@@ -251,7 +241,7 @@ namespace deneme2
             try
             {
                 connection.Open();
-                string query = "UPDATE Test_sorulari_tablosu SET HarcananSure = @ElapsedTime WHERE SorulanKelime = @Question";
+                string query = "UPDATE Test_sorulari_tablosu SET HarcananSure = @ElapsedTime, Quiz_tarihi = GETDATE() WHERE SorulanKelime = @Question";
                 command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ElapsedTime", elapsedTimeString);
                 command.Parameters.AddWithValue("@Question", label3.Text);
@@ -268,6 +258,58 @@ namespace deneme2
                     connection.Close();
                 }
             }
+        }
+
+        private void UpdateQuestionCorrectCount()
+        {
+            if (questionCorrectCount.ContainsKey(label3.Text))
+            {
+                questionCorrectCount[label3.Text]++;
+                if (questionCorrectCount[label3.Text] < 6)
+                {
+                    questionCorrectCount[label3.Text] = 0;
+                }
+            }
+            else
+            {
+                questionCorrectCount.Add(label3.Text, 1);
+            }
+
+            if (questionCorrectCount[label3.Text] >= 6)
+            {
+                MoveQuestionToKnownList(label3.Text);
+            }
+        }
+
+        private void MoveQuestionToKnownList(string question)
+        {
+            try
+            {
+                connection.Open();
+                string query = "INSERT INTO Ogrenilmis_sorular (SorulanKelime) VALUES (@Question)";
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Question", question);
+                command.ExecuteNonQuery();
+                learnedQuestions.Add(question);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Soruyu bilinen sorular listesine taşırken bir hata oluştu: " + ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+      
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
