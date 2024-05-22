@@ -15,6 +15,7 @@ namespace deneme2
         public Form3()
         {
             InitializeComponent();
+            label1.Text = DateTime.Now.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,6 +44,21 @@ namespace deneme2
             Form6 kelimeekleme = new Form6();
             kelimeekleme.Show();
             this.Close();
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

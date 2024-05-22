@@ -46,41 +46,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KullaniciGirisEkrani.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KullaniciGirisEkrani.Designer.cs">
-      <DependentUpon>KullaniciGirisEkrani.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="KullaniciKayitEkrani.cs">
+    <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KullaniciKayitEkrani.Designer.cs">
-      <DependentUpon>KullaniciKayitEkrani.cs</DependentUpon>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="SecimEkrani.cs">
+    <Compile Include="Form3.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SecimEkrani.Designer.cs">
-      <DependentUpon>SecimEkrani.cs</DependentUpon>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
-    <Compile Include="SifreSifirla.cs">
+    <Compile Include="Form4.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SifreSifirla.Designer.cs">
-      <DependentUpon>SifreSifirla.cs</DependentUpon>
+    <Compile Include="Form4.Designer.cs">
+      <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
-    <Compile Include="GunlukKelimeSormaEkrani.cs">
+    <Compile Include="Form5.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GunlukKelimeSormaEkrani.Designer.cs">
-      <DependentUpon>GunlukKelimeSormaEkrani.cs</DependentUpon>
+    <Compile Include="Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
     </Compile>
-    <Compile Include="KelimeEkleme.cs">
+    <Compile Include="Form6.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KelimeEkleme.Designer.cs">
-      <DependentUpon>KelimeEkleme.cs</DependentUpon>
+    <Compile Include="Form6.Designer.cs">
+      <DependentUpon>Form6.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,23 +90,23 @@
     <Compile Include="QuizEkrani.Designer.cs">
       <DependentUpon>QuizEkrani.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="KullaniciGirisEkrani.resx">
-      <DependentUpon>KullaniciGirisEkrani.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KullaniciKayitEkrani.resx">
-      <DependentUpon>KullaniciKayitEkrani.cs</DependentUpon>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SecimEkrani.resx">
-      <DependentUpon>SecimEkrani.cs</DependentUpon>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SifreSifirla.resx">
-      <DependentUpon>SifreSifirla.cs</DependentUpon>
+    <EmbeddedResource Include="Form4.resx">
+      <DependentUpon>Form4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GunlukKelimeSormaEkrani.resx">
-      <DependentUpon>GunlukKelimeSormaEkrani.cs</DependentUpon>
+    <EmbeddedResource Include="Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KelimeEkleme.resx">
-      <DependentUpon>KelimeEkleme.cs</DependentUpon>
+    <EmbeddedResource Include="Form6.resx">
+      <DependentUpon>Form6.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,6 +136,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\download.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\register-14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngtree-happy-women-learning-language-online-isolated-flat-vector-illustration-picture-image_8709165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset-password-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1633777-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3406805.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\992651.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout-icon-2048x2048-libuexip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5024797-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3d-rendered-cute-student-with-question-mark-free-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo-album-icon-png-14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\21610-200.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

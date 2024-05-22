@@ -9,7 +9,7 @@ namespace deneme2
 {
     public partial class Form4 : Form
     {
-        private string connectionString = "Data Source = .; Initial Catalog = EminHocaninDeneme; Integrated Security = True;";
+        private string connectionString = "Data Source = .; Initial Catalog = 6TekrardaDilOgrenme; Integrated Security = True;";
         private int remainingSeconds = 60;
         private int verificationCode; // Rastgele kodun saklandığı değişken
         private Timer countdownTimer;
@@ -25,7 +25,7 @@ namespace deneme2
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT COUNT(*) FROM KullaniciGiris WHERE Email = @email";
+                string query = "SELECT COUNT(*) FROM KullaniciGiris WHERE email = @email";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@email", email);
                 int count = (int)cmd.ExecuteScalar();
@@ -66,7 +66,7 @@ namespace deneme2
         private void UpdatePasswordInDatabase(string newPassword)
         {
             string email = textBox1.Text;
-            string query = "UPDATE KullaniciGiris SET Sifre = @Sifre WHERE Email = @Email";
+            string query = "UPDATE KullaniciGiris SET sifre = @Sifre WHERE email = @Email";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -203,6 +203,41 @@ namespace deneme2
         private string GenerateNewPassword()
         {
             return textBox4.Text;
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

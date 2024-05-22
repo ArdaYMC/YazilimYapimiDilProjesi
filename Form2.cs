@@ -53,7 +53,7 @@ namespace deneme2
 
             SendMailToUser(email,name); // Kullanıcıya hesap oluşturulduğu hakkında bilgi maili
 
-            AddUser(name, email, password); //Kullanıcının hesabını veritabanına ekleme
+            AddUser(name, password, email); //Kullanıcının hesabını veritabanına ekleme
             
         }
         private bool IsUserExists(string username) // Aynı isimde kullanıcı adının veritabanında olup olmadığının kontrolü

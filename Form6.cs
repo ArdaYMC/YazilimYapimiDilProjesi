@@ -66,7 +66,22 @@ namespace deneme2
                     MessageBox.Show("Bir hata oluştu: " + ex.Message);
                 }
             }
-        }   
+        }
+
+        private void Form6_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoxTrWordName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtBoxWordExample_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

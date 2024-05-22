@@ -16,7 +16,7 @@ namespace deneme2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new KullaniciGirisEkrani());
+            Application.Run(new Form1());
         }
     }
 }
