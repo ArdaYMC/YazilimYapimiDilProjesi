@@ -12,7 +12,7 @@ namespace deneme2
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        public Form3(int kullaniciID)
         {
             InitializeComponent();
             label1.Text = DateTime.Now.ToString();

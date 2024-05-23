@@ -15,6 +15,8 @@ namespace deneme2
     public partial class Form1 : Form
     {
         private string connectionString = "Data Source = .; Initial Catalog = 6TekrardaDilOgrenme; Integrated Security = True;"; // Veritabanı bağlantı dizesi
+        private int kullaniciID;
+
         public Form1()
         {
             InitializeComponent();
@@ -38,13 +40,12 @@ namespace deneme2
         {
             string username = textBox1.Text;
             string password = textBox2.Text;
-
             bool isAuthenticated = AuthenticateUser(username, password);
 
             if (isAuthenticated)
             {
                 MessageBox.Show("Giriş Yapılmıştır.");
-                Form3 form3 = new Form3();
+                Form3 form3 = new Form3(kullaniciID);
                 form3.Show();
                 this.Hide();
             }

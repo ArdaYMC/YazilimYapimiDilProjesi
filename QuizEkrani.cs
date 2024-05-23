@@ -40,7 +40,7 @@ namespace deneme2
             ShowQuestions();
             startTime = DateTime.Now;
         }
-
+        int kullaniciID;
         private void button1_Click(object sender, EventArgs e)
         {
             TimeSpan elapsedTime = DateTime.Now - startTime;
@@ -194,7 +194,6 @@ namespace deneme2
                 }
             }
         }
-
         private void ShuffleChoices()
         {
             choices = wrongChoices.OrderBy(x => Guid.NewGuid()).ToArray();
@@ -223,7 +222,6 @@ namespace deneme2
                 return "";
             }
         }
-
         private void UpdateProgressBar()
         {
             if (questionAnsweredCorrectly)
@@ -234,9 +232,11 @@ namespace deneme2
             if (progressBar1.Value == progressBar1.Maximum)
             {
                 MessageBox.Show("Tebrikler! Quiz tamamlandı.");
+                Form3 anamenu = new Form3(kullaniciID);
+                anamenu.Show();
+                this.Close();
             }
         }
-
         private void SaveElapsedTime(string elapsedTimeString)
         {
             try
@@ -261,7 +261,6 @@ namespace deneme2
                 }
             }
         }
-
         private void UpdateQuestionCorrectCount()
         {
             if (questionCorrectCount.ContainsKey(label3.Text))
@@ -282,7 +281,6 @@ namespace deneme2
                 MoveQuestionToKnownList(label3.Text);
             }
         }
-
         private void MoveQuestionToKnownList(string question)
         {
             try
@@ -306,9 +304,6 @@ namespace deneme2
                 }
             }
         }
-
-      
-
         private void button2_Click(object sender, EventArgs e)
         {
             
@@ -317,6 +312,49 @@ namespace deneme2
         private void QuizEkrani_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form3 donus = new Form3(kullaniciID);
+            donus.Show();
+            this.Close();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                connection.Open();
+                string query = "SELECT K.kelimeOrnek " +
+                    "FROM KelimeOrnek K " +
+                    "INNER JOIN Kelimeler L ON K.kelimeID = L.kelimeID " +
+                    "WHERE L.ingilizceKelime = @Question";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Question", label3.Text);
+
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    string kelimeOrnek = reader["kelimeOrnek"].ToString();
+                    MessageBox.Show("Örnek cümle: " + kelimeOrnek);
+                }
+                else
+                {
+                    MessageBox.Show("Örnek cümle bulunamadı.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Örnek cümle alınırken bir hata oluştu: " + ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }

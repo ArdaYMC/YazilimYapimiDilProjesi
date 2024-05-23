@@ -118,6 +118,7 @@ namespace deneme2
                 MessageBox.Show("E-mail gönderilmiştir");
 
                 textBox1.Hide();
+                label1.Visible = false;
                 label4.Visible = true;
                 label5.Visible = true;
                 label6.Visible = true;
@@ -236,6 +237,11 @@ namespace deneme2
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
