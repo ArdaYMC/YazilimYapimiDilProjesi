@@ -10,8 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
 namespace deneme2
 {
+
+
     public partial class Form1 : Form
     {
         private string connectionString = "Data Source = .; Initial Catalog = 6TekrardaDilOgrenme; Integrated Security = True;"; // Veritabanı bağlantı dizesi
@@ -40,6 +43,7 @@ namespace deneme2
         {
             string username = textBox1.Text;
             string password = textBox2.Text;
+            
             bool isAuthenticated = AuthenticateUser(username, password);
 
             if (isAuthenticated)
@@ -59,13 +63,18 @@ namespace deneme2
             bool isAuthenticated = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
                 SqlCommand command = new SqlCommand("SELECT kullaniciAdi, sifre FROM KullaniciGiris WHERE kullaniciAdi = @Username AND sifre = @Password", connection);
                 command.Parameters.AddWithValue("@Username", username);
                 command.Parameters.AddWithValue("@Password", password);
+
+                string query = "SELECT kullaniciID FROM KullaniciGiris WHERE kullaniciAdi=@kullaniciAdi";
+                SqlCommand comm=new SqlCommand(query, connection);
+                comm.Parameters.AddWithValue("@kullaniciAdi", username);
+
+                kullaniciID= Convert.ToInt32(comm.ExecuteScalar());
                 try
                 {
-                    connection.Open();
-
                     SqlDataReader reader = command.ExecuteReader();
 
                     if (reader.HasRows)

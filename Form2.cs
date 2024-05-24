@@ -112,7 +112,7 @@ namespace deneme2
             {
                 using (MailMessage mail = new MailMessage())
                 {
-                    mail.From = new MailAddress("Sebahattintegi@outlook.com"); // Gönderici mail adresi
+                    mail.From = new MailAddress("projectforshaf@outlook.com"); // Gönderici mail adresi
                     mail.To.Add(kullaniciEmail); // Alıcı mail adresi
                     mail.Subject = "Kaydınız Başarıyla Oluşturuldu";
                     mail.Body = $"Merhaba {isim},\n\nKaydınız başarıyla oluşturulmuştur.";
@@ -120,7 +120,7 @@ namespace deneme2
                     using (SmtpClient smtp = new SmtpClient("smtp.outlook.com")) // SMTP sunucu adresi
                     {
                         smtp.Port = 587; // SMTP port numarası
-                        smtp.Credentials = new NetworkCredential("Sebahattintegi@outlook.com", "Sebahattin12!"); // Gönderici mail adresi ve şifre
+                        smtp.Credentials = new NetworkCredential("projectforshaf@outlook.com", "Shaf123321"); // Gönderici mail adresi ve şifre
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }

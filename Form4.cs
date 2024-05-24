@@ -39,7 +39,7 @@ namespace deneme2
             {
                 using (MailMessage mail = new MailMessage())
                 {
-                    mail.From = new MailAddress("sebahattintegi@outlook.com");
+                    mail.From = new MailAddress("projectforshaf@outlook.com");
                     mail.To.Add(email);
                     mail.Subject = "Şifre Değiştirme Kodunuz Aşağıdadır";
                     mail.Body = $"Merhaba değerli Kullanıcımız,\n\nŞifre değiştirme kodunuz : {verificationCode}";
@@ -47,7 +47,7 @@ namespace deneme2
                     using (SmtpClient smtp = new SmtpClient("smtp.outlook.com"))
                     {
                         smtp.Port = 587;
-                        smtp.Credentials = new NetworkCredential("sebahattintegi@outlook.com", "Sebahattin12!");
+                        smtp.Credentials = new NetworkCredential("projectforshaf@outlook.com", "Shaf123321");
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }

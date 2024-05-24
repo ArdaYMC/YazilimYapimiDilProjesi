@@ -109,7 +109,15 @@ namespace deneme2
                     correctAnswer = reader["turkceKelime"].ToString();
                     string imageUrl = reader["kelimeResimYolu"].ToString();
 
-                    pictureBox1.ImageLocation = imageUrl;
+                    if (!string.IsNullOrEmpty(imageUrl) && System.IO.File.Exists(imageUrl))
+                    {
+                        pictureBox1.ImageLocation = imageUrl;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Görsel yüklenemedi: Dosya yolu geçersiz veya dosya bulunamadı.");
+                        pictureBox1.Image = null; // Resim bulunamazsa boş resim göster
+                    }
 
                     GetWrongChoices();
                     ShuffleChoices();
@@ -129,6 +137,7 @@ namespace deneme2
                 MessageBox.Show("Soruları görüntülerken bir hata oluştu: " + ex.Message);
             }
         }
+
 
         private void CheckAnswer()
         {

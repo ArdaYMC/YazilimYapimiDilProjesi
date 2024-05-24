@@ -16,8 +16,9 @@ namespace deneme2
         {
             InitializeComponent();
             label1.Text = DateTime.Now.ToString();
+            this.kullaniciID = kullaniciID;
         }
-
+        private  int kullaniciID;
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -41,7 +42,7 @@ namespace deneme2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form6 kelimeekleme = new Form6();
+            Form6 kelimeekleme = new Form6(kullaniciID);
             kelimeekleme.Show();
             this.Close();
         }
@@ -59,6 +60,14 @@ namespace deneme2
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            KullaniciBilgiler info = new KullaniciBilgiler(kullaniciID);
+            info.Show();
+            this.Close();
         }
     }
 }
